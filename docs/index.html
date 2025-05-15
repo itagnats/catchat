@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cat Chat😽💬</title>
+    <style>
+      body {
+        background-color: #ffe6f0;
+        font-family: "Comic Sans MS", cursive;
+        text-align: center;
+        padding: 40px;
+        color: #d81b60;
+      }
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+      .cat-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .cat {
+        width: 120px;
+        height: 120px;
+        cursor: pointer;
+        transition: transform 0.1s;
+      }
+      .cat:active {
+        transform: scale(0.95);
+      }
+      .chat-box {
+        margin-top: 30px;
+        background: #fff0f5;
+        border: 2px dashed #ff69b4;
+        padding: 20px;
+        border-radius: 15px;
+        min-height: 80px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>😽 Cat Chat 💬</h1>
+    <div class="cat-container">
+      <img src="cat1.png" class="cat" alt="Cat 1" data-cat="0" />
+      <img src="cat2.png" class="cat" alt="Cat 2" data-cat="1" />
+      <img src="cat3.png" class="cat" alt="Cat 3" data-cat="2" />
+    </div>
+    <div class="chat-box" id="chatBox">
+      Click a cat to start a conversation!
+    </div>
+    <audio id="kissSound" src="kiss.mp3"></audio>
+
+    <script>
+      const kissSound = document.getElementById("kissSound");
+      const chatBox = document.getElementById("chatBox");
+
+      const dialogues = [
+        [
+          "Meow! Did you know I sleep 16 hours a day?",
+          "I chased a red dot for 10 minutes today. It disappeared. Mysterious!",
+          "Psst... I saw Cat 2 licking the window again.",
+        ],
+        [
+          "Why hooman always take pictures when I poop? So rude!",
+          "I had a tuna dream last night. Best sleep ever.",
+          "I once knocked a glass off the table. No regrets.",
+        ],
+        [
+          "I secretly love belly rubs... but only when I say so.",
+          "That bird outside thinks he’s safe. Just wait.",
+          "Can someone tell him to stop snoring?",
+        ],
+      ];
+
+      const catClickIndex = [0, 0, 0];
+
+      document.querySelectorAll(".cat").forEach((cat) => {
+        cat.addEventListener("click", (e) => {
+          const catIndex = parseInt(cat.dataset.cat);
+          const lines = dialogues[catIndex];
+          const line = lines[catClickIndex[catIndex] % lines.length];
+          chatBox.textContent = line;
+          catClickIndex[catIndex]++;
+
+          kissSound.currentTime = 0;
+          kissSound.play();
+        });
+      });
+    </script>
+  </body>
+</html>
